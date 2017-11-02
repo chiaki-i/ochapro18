@@ -25,7 +25,7 @@ def isPalindrome(lst):
     result = 0
     for i in counter.values():
         if i % 2 == 0:
-            result = result
+            pass
         else:
             result += 1
     if result <= 1:
