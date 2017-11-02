@@ -1,5 +1,4 @@
 #include<string>
-#include<algorithm>
 #include<iostream>
 
 ///// 1.1 /////
@@ -71,8 +70,8 @@ void test3(std::string arg1, int arg2, std::string expected){
     if (answer == expected){
         std::cout << "PASS. " << arg1 << " (" << arg2 << "): " << answer << "\n";
     } else {
-        std::cout << "FAIL. " << arg1 << "| (" << arg2 << ") should be  " << expected;
-        std::cout << " but was " << answer << "|\n";
+        std::cout << "FAIL. " << arg1 << " (" << arg2 << ") should be " << expected;
+        std::cout << " but was " << answer << "\n";
     }
 }
 
@@ -96,9 +95,12 @@ int main(){
     std::cout << "=== 1.2 finished === \n";
     std::cout << "=== 1.3 started ==== \n";
     test3(" ", 0, "");
+    test3("a", 1, "a");
     test3("a ", 1, "a");
     test3(" a ", 2, "%20a");
     test3("a b ", 3, "a%20b");
     test3("Mr John Smith ", 13, "Mr%20John%20Smith");
+    std::cout << "=== 1.3 finished === \n";
+    
     return 0;
 }
