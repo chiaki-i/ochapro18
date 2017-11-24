@@ -1,6 +1,4 @@
 #include<iostream>
-#include<stdexcept>
-
 #define SIZE 10
 
 template <class T> class Stack{
@@ -8,33 +6,33 @@ public:
     T stack[SIZE];
     int top;
     
-    // initialization
     Stack(){
         top = 0;
     }
 
-    void push(T item){ // 一番上からデータを削除する
+    void push(T item){ // 一番上にデータ item を追加する
         if (top == SIZE) {
-            std::cout << "Stack if Full. \n";
-            return;
+            std::cout << "Stack is full" << std::endl;
+            throw FullStackException();
+            // 連結リストを使った場合は新しいノードを加えるだけなのでこの例外は不要になります
         }
         stack[top] = item;
         top++;
     }
 
-    T pop(){ // 一番上に要素 item を追加する
+    T pop(){ // 一番上からデータを削除する
         if (top == 0) {
-            std::cout << "Stack is Empty. \n";
-            return 0; //
+            std::cout << "Stack is empty" << std::endl;
+            throw EmptyStackException();
         }
         top--;
         return stack[top];
     }
 
-    void peek(){ // 一番上の要素を返す
+    T peek(){ // 一番上のデータを返す
         if (top == 0){
-            std::cout << "Stack is Empty. \n";
-            return;
+            std::cout << "Stack is empty" << std::endl;
+            throw EmptyStackException();
         }
         return stack[top];
     }
@@ -46,16 +44,13 @@ public:
             return false;
         }
     }
+
+    class EmptyStackException{
+    };
+
+    class FullStackException{
+    };
 };
-
-template <class T> class Queue{
-public:
-    void add(T item); // 要素をリストの最後に追加する
-    T remove(); // 先頭の要素を削除する
-    T peek(); // 先頭の要素を返す
-    bool isEmpty(); // 空の場合のみtrueを返す
-}
-
     
 void stacktest(){
     Stack<int> s1, s2;
@@ -77,6 +72,8 @@ void stacktest(){
     std::cout << s2.isEmpty() << std::endl;
     for(int i = 0; i < 4; i++) std::cout << "s2 pop! " << s2.pop() << std::endl;
     std::cout << s2.isEmpty() << std::endl;
+
+    std::cout << s2.peek() << std::endl; // 例外
 }
 
 int main(){
